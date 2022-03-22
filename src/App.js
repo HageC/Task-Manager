@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const value = { task };
+    setTasks([...tasks, value]);
+    setTask("");
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setTask(value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1>Task Manager</h1>
       </header>
-    </div>
+
+      <form onSubmit={submitHandler}>
+        <input
+          type="text"
+          placeholder="enter task"
+          value={task}
+          onChange={handleChange}
+        />
+        <input type="submit" className="submit" />
+      </form>
+
+      <section className="items">
+        {tasks.map((task, index) => {
+          return (
+            <h3 className="item" key={index}>
+              {task.task}
+            </h3>
+          );
+        })}
+      </section>
+    </>
   );
 }
 

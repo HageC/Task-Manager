@@ -1,19 +1,32 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { BsFillTrashFill } from "react-icons/bs";
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")));
   const [task, setTask] = useState("");
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const value = { task };
-    setTasks([...tasks, value]);
-    setTask("");
+    if (task) {
+      const value = { task, id: new Date().getTime().toString() };
+
+      setTasks([...tasks, value]);
+      setTask("");
+    }
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
     setTask(value);
   };
+
+  const handleDelete = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <>
@@ -34,9 +47,12 @@ function App() {
       <section className="items">
         {tasks.map((task, index) => {
           return (
-            <h3 className="item" key={index}>
+            <div className="item" key={index}>
               {task.task}
-            </h3>
+              <button className="delete" onClick={() => handleDelete(task.id)}>
+                <BsFillTrashFill />
+              </button>
+            </div>
           );
         })}
       </section>

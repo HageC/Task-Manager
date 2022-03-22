@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 function App() {
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")));
+  const getData = () => {
+    if (localStorage.getItem("tasks")) {
+      return JSON.parse(localStorage.getItem("tasks"));
+    } else {
+      return [];
+    }
+  };
+  const [tasks, setTasks] = useState(getData());
   const [task, setTask] = useState("");
 
   const submitHandler = (e) => {

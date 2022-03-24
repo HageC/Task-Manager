@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   margin-top: 2rem;
@@ -31,11 +34,13 @@ form {
   max-width: 500px;
   margin: 0 auto;
 }
+
 input {
   min-width: 500px;
   min-height: 20px;
   padding: 5px;
   font-size: 1rem;
+  margin: 0 auto;
 }
 
 .submit {
@@ -48,6 +53,7 @@ input {
   cursor: pointer;
   padding: 5px;
   margin-top: 1rem;
+  margin: 10px auto;
 }
 
 .submit:hover {
@@ -83,11 +89,33 @@ input {
 .delete {
   border-style: none;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 1.25rem;
   transition: 0.5s;
   cursor: pointer;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.edit {
+  border-style: none;
+  background-color: transparent;
+  font-size: 1.25rem;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.edit-input {
+  min-width: 300px;
+  padding: 5px;
+  font-size: 1rem;
+}
 .delete:hover {
   color: red;
+}
+
+.edit:hover {
+  color: gray;
 }
